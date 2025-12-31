@@ -28,12 +28,12 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           # Inputs
-          modrinth-id: YOUR_MODRINTH_PROJECT_ID_HERE
-          curseforge-id: YOUR_CURSEFORGE_PROJECT_ID_HERE
+          modrinth-id: mixed-stacks
+          curseforge-id: mixed-stacks
           
           # Secrets (Read from GitHub Settings)
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
+          curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
           # File selection (Uploads the main jar, ignores sources/dev jars)
           files: |
