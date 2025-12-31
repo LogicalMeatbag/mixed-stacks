@@ -1,0 +1,54 @@
+name: Publish to Modrinth & CurseForge
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build Artifacts
+        run: ./gradlew build
+
+      - name: Publish to Modrinth and CurseForge
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          # Inputs
+          modrinth-id: YOUR_MODRINTH_PROJECT_ID_HERE
+          curseforge-id: YOUR_CURSEFORGE_PROJECT_ID_HERE
+          
+          # Secrets (Read from GitHub Settings)
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          # File selection (Uploads the main jar, ignores sources/dev jars)
+          files: |
+            build/libs/!(*-dev|*-sources).jar
+
+          # Metadata
+          name: ${{ github.event.release.name }}
+          version: ${{ github.event.release.tag_name }}
+          version-type: beta
+          changelog: ${{ github.event.release.body }}
+          
+          # Compatibility
+          loaders: |
+            fabric
+          game-versions: |
+            1.21
+            1.21.1
+            # Add or remove versions here as you test them
