@@ -49,6 +49,9 @@ jobs:
           version-type: beta
           changelog: ${{ github.event.release.body }}
           
-          # Compatibility
-          loaders: fabric
-          game-versions: "1.21, 1.21.1"
+# Compatibility
+          loaders: |
+            fabric
+          game-versions: |
+            1.21
+            1.21.1
