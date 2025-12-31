@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:builtin/entity",
+  "textures": {
+    "layer0": "mixed-stacks:item/mixed_stack"
+  },
+  "gui_light": "front"
+}

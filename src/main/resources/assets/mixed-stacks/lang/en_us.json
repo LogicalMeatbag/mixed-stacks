@@ -1,0 +1,5 @@
+{
+  "item.mixed-stacks.mixed_stack": "Mixed Stack",
+  "item.mixed-stacks.mixed_stack_format": "Mixed %s %s",
+  "item.mixed-stacks.mixed_stack_double_format": "%s %s + %s %s"
+}
