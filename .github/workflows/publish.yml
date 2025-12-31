@@ -21,6 +21,10 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      # Fix permissions automatically
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build Artifacts
         run: ./gradlew build
 
@@ -31,11 +35,11 @@ jobs:
           modrinth-id: mixed-stacks
           curseforge-id: mixed-stacks
           
-          # Secrets (Read from GitHub Settings)
+          # Secrets
           modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
           curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
-          # File selection (Uploads the main jar, ignores sources/dev jars)
+          # File selection
           files: |
             build/libs/!(*-dev|*-sources).jar
 
@@ -46,9 +50,5 @@ jobs:
           changelog: ${{ github.event.release.body }}
           
           # Compatibility
-          loaders: |
-            fabric
-          game-versions: |
-            1.21
-            1.21.1
-            # Add or remove versions here as you test them
+          loaders: fabric
+          game-versions: "1.21, 1.21.1"
